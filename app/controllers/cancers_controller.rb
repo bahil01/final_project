@@ -6,6 +6,7 @@ class CancersController < ApplicationController
   end
 
   def show
+    @treatment = Treatment.new
     @cancer = Cancer.find(params[:id])
 
     render("cancers/show.html.erb")
