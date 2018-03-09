@@ -24,7 +24,7 @@
           Cancer
         </label>
 
-        <input type="text" id="cancer_id" name="cancer_id" placeholder="Cancer" class="form-control" value="<%= @treatment.cancer_id %>">
+        <%= select_tag(:cancer_id, options_from_collection_for_select(Cancer.all, :id, :cancer_name, @treatment.cancer_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for treatment_name -->
