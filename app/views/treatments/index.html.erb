@@ -16,7 +16,7 @@
 
       <% @treatments.each do |treatment| %>
       <tr>
-        <td><%= treatment.cancer_id %></td>
+        <td><%= treatment.cancer.cancer_name %></td>
         <td><%= treatment.treatment_name %></td>
         <td>
           <a href="/treatments/<%= treatment.id %>" class="btn btn-primary">Show</a>
