@@ -1,6 +1,7 @@
 class LogsController < ApplicationController
   def index
-    @logs = Log.page(params[:page]).per(10)
+    @q = Log.ransack(params[:q])
+    @logs = @q.result(:distinct => true).includes(:user, :symptom).page(params[:page]).per(10)
 
     render("logs/index.html.erb")
   end
