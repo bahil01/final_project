@@ -6,7 +6,13 @@
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
       <dt>Cancer</dt>
-      <dd><%= @treatment.cancer_id %></dd>
+      <dd>
+        <% if @treatment.cancer.present? %>
+          <a href="/cancers/<%= @treatment.cancer_id %>">
+            <%= @treatment.cancer.cancer_name %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>Treatment name</dt>
       <dd><%= @treatment.treatment_name %></dd>
