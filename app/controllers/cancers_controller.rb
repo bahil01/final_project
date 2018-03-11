@@ -1,13 +1,12 @@
 class CancersController < ApplicationController
   def index
     @q = Cancer.ransack(params[:q])
-    @cancers = @q.result(:distinct => true).includes(:user, :treatments).page(params[:page]).per(10)
+    @cancers = @q.result(:distinct => true).includes(:user).page(params[:page]).per(10)
 
     render("cancers/index.html.erb")
   end
 
   def show
-    @treatment = Treatment.new
     @cancer = Cancer.find(params[:id])
 
     render("cancers/show.html.erb")

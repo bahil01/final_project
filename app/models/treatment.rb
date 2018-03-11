@@ -1,7 +1,7 @@
 class Treatment < ApplicationRecord
   # Direct associations
 
-  belongs_to :cancer
+  belongs_to :user
 
   # Indirect associations
 

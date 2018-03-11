@@ -1,7 +1,7 @@
 class TreatmentsController < ApplicationController
   def index
     @q = Treatment.ransack(params[:q])
-    @treatments = @q.result(:distinct => true).includes(:cancer).page(params[:page]).per(10)
+    @treatments = @q.result(:distinct => true).includes(:user).page(params[:page]).per(10)
 
     render("treatments/index.html.erb")
   end
@@ -21,7 +21,7 @@ class TreatmentsController < ApplicationController
   def create
     @treatment = Treatment.new
 
-    @treatment.cancer_id = params[:cancer_id]
+    @treatment.user_id = params[:user_id]
     @treatment.treatment_name = params[:treatment_name]
 
     save_status = @treatment.save
@@ -49,7 +49,7 @@ class TreatmentsController < ApplicationController
   def update
     @treatment = Treatment.find(params[:id])
 
-    @treatment.cancer_id = params[:cancer_id]
+    @treatment.user_id = params[:user_id]
     @treatment.treatment_name = params[:treatment_name]
 
     save_status = @treatment.save
