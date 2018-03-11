@@ -54,9 +54,44 @@
       </script>
 
         <div class="form-group">
-      <%= f.label :cancer_cancer_name_cont, "Cancer cancer_name contains" %>
-      <%= f.text_field :cancer_cancer_name_cont, :class => "form-control", :placeholder => "Cancer cancer_name contains" %>
-    </div>
+          <%= f.label :created_at, "User Created at" %>
+          <div class="row">
+            <div class='col-md-6 mb-1'>
+              <div class='input-group date' id='usergteqcreated_atPicker'>
+                  <%= f.text_field :user_created_at_gteq, :class => "form-control", :placeholder => "User Created at greater than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='input-group date' id='userlteqcreated_atPicker'>
+                  <%= f.text_field :user_created_at_lteq, :class => "form-control", :placeholder => "User Created at less than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#usergteqcreated_atPicker').datetimepicker({
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#userlteqcreated_atPicker').datetimepicker({
+                  useCurrent: false,
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#usergteqcreated_atPicker').on("dp.change", function (e) {
+                  $('#userlteqcreated_atPicker').data("DateTimePicker").minDate(e.date);
+              });
+              $('#userlteqcreated_atPicker').on("dp.change", function (e) {
+                  $('#usergteqcreated_atPicker').data("DateTimePicker").maxDate(e.date);
+              });
+          });
+      </script>
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
@@ -72,7 +107,7 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Cancer</th>
+        <th>User</th>
         <th>Treatment name</th>
         <th>Actions</th>
       </tr>
@@ -80,9 +115,9 @@
       <% @treatments.each do |treatment| %>
       <tr>
         <td>
-          <% if treatment.cancer.present? %>
-            <a href="/cancers/<%= treatment.cancer.id %>">
-              <%= treatment.cancer.cancer_name %>
+          <% if treatment.user.present? %>
+            <a href="/users/<%= treatment.user.id %>">
+              <%= treatment.user.created_at %>
             </a>
           <% end %>
         </td>
